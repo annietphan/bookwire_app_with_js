@@ -14,10 +14,10 @@ class BooksController < ApplicationController
       # @books = Book.where(genre_id: @genre_id).ordered
       @genre_id = Genre.find_by_name(params[:genre]).id
       @books = Book.by_genre(@genre_id).ordered
-      respond_to do |f|
-        f.html {render :index}
-        f.json {render json: @books}
-      end
+      # respond_to do |f|
+      #   f.html {render :index}
+      #   f.json {render json: @books}
+      # end
     # else
     #   @books = Book.all.group_by(&:author)
     end

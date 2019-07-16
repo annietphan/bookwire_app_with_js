@@ -15,3 +15,14 @@
 //     url: 'http://localhost:3000/books'
 //   })
 // }
+
+$(() => {
+  bindClickHandlers()
+})
+
+const bindClickHandlers = () => {
+  $('.my_books').on('click', (event) => {
+    event.preventDefault()
+    console.log('hello')
+  })
+}
