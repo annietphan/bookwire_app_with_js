@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'books#index'
 
   devise_for :users, :controllers => {registrations: 'registrations', :omniauth_callbacks => 'callbacks' }
-
+  resources :users, only: [:show]
   resources :books do
     resources :reviews
   end

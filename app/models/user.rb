@@ -23,4 +23,9 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0,20]
     end
   end
+
+  def self.find_by_uid!(uid)
+    User.find_by!("profile_name = :p OR id = :p", p: uid)
+  end
+  
 end
