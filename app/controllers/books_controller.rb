@@ -90,6 +90,10 @@ class BooksController < ApplicationController
     @user_id = current_user.id
     # @books = Book.where(user_id: current_user.id).ordered
     @books = Book.my_books(@user_id).ordered
+    respond_to do |f|
+      f.html {render :my_books}
+      f.json {render json: @books}
+    end
   end
 
   private

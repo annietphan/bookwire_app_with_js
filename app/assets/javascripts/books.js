@@ -23,6 +23,8 @@ $(() => {
 const bindClickHandlers = () => {
   $('.my_books').on('click', (event) => {
     event.preventDefault()
-    console.log('hello')
+    fetch(`/my_books.json`)
+      .then((response) => response.json())
+      .then(data => console.log(data))
   })
 }
