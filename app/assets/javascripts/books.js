@@ -29,7 +29,9 @@ const bindClickHandlers = () => {
         $('#js-content').html('')
         books.forEach(book => {
           let newBook = new Book(book)
-          console.log(newBook)
+          let bookHtml = newBook.formatIndex()
+          console.log(bookHtml)
+          $('#js-content').append(bookHtml)
         })
       })
   })
@@ -44,4 +46,12 @@ function Book(book) {
   this.user = book.user
   this.reviews = book.reviews
   this.genre = book.genre
+}
+
+Book.prototype.formatIndex = function() {
+  console.log(this)
+  let bookHtml = `
+    <h1>${this.title}</h1>
+  `
+  return bookHtml
 }
