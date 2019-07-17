@@ -24,7 +24,24 @@ const bindClickHandlers = () => {
   $('.my_books').on('click', (event) => {
     event.preventDefault()
     fetch(`/my_books.json`)
-      .then((response) => response.json())
-      .then(data => console.log(data))
+      .then(response => response.json())
+      .then(books => {
+        $('#js-content').html('')
+        books.forEach(book => {
+          let newBook = new Book(book)
+          console.log(newBook)
+        })
+      })
   })
+}
+
+function Book(book) {
+  this.id = book.id
+  this.title = book.title
+  this.author = book.author
+  this.summary = book.summary
+  this.book_image = book.book_image
+  this.user = book.user
+  this.reviews = book.reviews
+  this.genre = book.genre
 }
