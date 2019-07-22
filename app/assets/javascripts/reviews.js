@@ -18,5 +18,16 @@ $(document).ready(function() {
     }
   })
 
-  $
+  $(".morelink").click(function(){
+    if($(this).hasClass("less")) {
+      $(this).removeClass("less")
+      $(this).html(moreText)
+    } else {
+      $(this).addClass("less")
+      $(this).html(lessText)
+    }
+    $(this).parent().prev().toggle()
+    $(this).prev().toggle()
+    return false
+  })
 })
