@@ -59,6 +59,11 @@ const bindClickHandlers = () => {
     $.post('/books', values)
       .done(function(data) {
         $('#js-content').html('')
+        const newBook = new Book(data)
+        const addedHtml = newBook.formatShow()
+
+        $('#js-content').html(addedHtml)
+
       })
   })
 }
@@ -85,7 +90,7 @@ function Book(book) {
   this.title = book.title
   this.author = book.author
   this.summary = book.summary
-  this.book_image = book.book_image
+  // this.book_image = book.book_image
   this.user = book.user
   this.reviews = book.reviews
   this.genre = book.genre
