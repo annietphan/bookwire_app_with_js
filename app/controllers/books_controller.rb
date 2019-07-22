@@ -49,10 +49,11 @@ class BooksController < ApplicationController
     # @book.genre_id = params[:genre_id]
     set_genre
     if @book.save
-      respond_to do |f|
-        f.html {redirect_to root_path, notice: 'Book successfully created!'}
-        f.json {render json: @book}
-      end
+      render json: @book
+      # respond_to do |f|
+      #   f.html {redirect_to root_path, notice: 'Book successfully created!'}
+      #   f.json {render json: @book}
+      # end
     else
       render 'new'
     end
