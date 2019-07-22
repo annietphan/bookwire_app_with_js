@@ -53,7 +53,8 @@ const bindClickHandlers = () => {
 
   $('#new_book').on('submit', function(event) {
     event.preventDefault()
-    console.log('submitting post')
+
+    const values = $(this).serialize()
   })
 }
 
