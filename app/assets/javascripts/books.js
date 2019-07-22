@@ -55,6 +55,11 @@ const bindClickHandlers = () => {
     event.preventDefault()
 
     const values = $(this).serialize()
+
+    $.post('/books', values)
+      .done(function(data) {
+        console.log(data)
+      })
   })
 }
 
