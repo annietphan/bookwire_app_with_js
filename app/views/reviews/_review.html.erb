@@ -1,5 +1,10 @@
 <div class="review-rating" data-score="<%= review.rating %>"></div>
-<p><%= review.comment %></p>
+<div id="body-<%= review.id %>">
+  <p><%= truncate review.comment %>
+    <a href='#' class="js-more" data-id='<%= review.id %>'>
+      more...</a>
+  </p>
+</div>
 
 
 <% if user_signed_in? %>

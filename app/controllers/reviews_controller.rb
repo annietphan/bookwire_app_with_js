@@ -1,10 +1,17 @@
 class ReviewsController < ApplicationController
   before_action :set_book, except: [:my_reviews]
-  before_action :set_review, only: [:edit, :update, :destroy]
+  before_action :set_review, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :edit]
 
   def index
     @reviews = @book.reviews
+  end
+
+  def show
+    respond_to do |f|
+      f.html {render :show}
+      f.json {render json: @review}
+    end
   end
 
   def new

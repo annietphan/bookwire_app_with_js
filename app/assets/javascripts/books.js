@@ -23,19 +23,56 @@ $(() => {
 const bindClickHandlers = () => {
   $('.my_books').on('click', (event) => {
     event.preventDefault()
-    fetch(`/my_books.json`)
-      .then(response => response.json())
-      .then(books => {
-        $('#js-content').html('')
-        books.forEach(book => {
-          let newBook = new Book(book)
-          let bookHtml = newBook.formatIndex()
-          console.log(bookHtml)
-          $('#js-content').append(bookHtml)
-        })
-      })
+    history.pushState(null, null, "my_books")
+    getMyBooks()
+    // fetch(`/my_books.json`)
+    //   .then(response => response.json())
+    //   .then(books => {
+    //     $('#js-content').html('')
+    //     let header = '<h1><strong>My Books<strong></h1>'
+    //     $('#js-content').append(header)
+    //     books.forEach(book => {
+    //       let newBook = new Book(book)
+    //       let bookHtml = newBook.formatIndex()
+    //       $('#js-content').append(bookHtml)
+    //     })
+    //   })
+  })
+  $(document).on('click', ".show_link", function(event) {
+    event.preventDefault()
+    $('#js-content').html('')
+    let id = $(this).attr('data-id')
+    fetch(`/books/${id}.json`)
+    .then(response => response.json())
+    .then(book => {
+      let newBook = new Book(book)
+      let bookHtml = newBook.formatShow()
+      $('#js-content').append(bookHtml)
+    })
+  })
+
+  $('#new_book').on('submit', function(event) {
+    event.preventDefault()
+    console.log('submitting post')
   })
 }
+
+const getMyBooks = () => {
+  fetch(`/my_books.json`)
+    .then(response => response.json())
+    .then(books => {
+      $('#js-content').html('')
+      let header = '<h1><strong>My Books<strong></h1>'
+      $('#js-content').append(header)
+      books.forEach(book => {
+        let newBook = new Book(book)
+        let bookHtml = newBook.formatIndex()
+        $('#js-content').append(bookHtml)
+      })
+    })
+}
+
+
 
 function Book(book) {
   this.id = book.id
@@ -48,10 +85,18 @@ function Book(book) {
   this.genre = book.genre
 }
 
+// add the rest of formatting in this method
 Book.prototype.formatIndex = function() {
-  console.log(this)
   let bookHtml = `
-    <h1>${this.title}</h1>
+    <a href="/books/${this.id}" data-id='${this.id}' class ="show_link"><h3>${this.title}</h3></a>
+  `
+  return bookHtml
+}
+
+// add the rest of formatting in this method
+Book.prototype.formatShow = function() {
+  let bookHtml = `
+    <h3>${this.title}</h3>
   `
   return bookHtml
 }
