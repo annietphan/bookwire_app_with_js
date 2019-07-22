@@ -108,6 +108,9 @@ Book.prototype.formatIndex = function() {
 Book.prototype.formatShow = function() {
   let bookHtml = `
     <div class="row">
+      <div class="col-md-4">
+        <p>image goes here</p>
+      </div>
       <div class="col-md-8">
         <h2><strong>${this.title}</strong></h2>
         <h3>${this.author}</h3>
