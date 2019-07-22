@@ -1,26 +1,10 @@
-// $(function() {
-//   console.log('our js is actually loading!')
-//   listenForClick()
-// })
-//
-// function listenForClick() {
-//   $("button#click-me").on('click', function (event) {
-//     event.preventDefault()
-//     console.log('you clicked a button')
-//   })
-// }
-//
-// function getReview() {
-//   $.ajax({
-//     url: 'http://localhost:3000/books'
-//   })
-// }
+
 
 $(() => {
-  bindClickHandlers()
+  bookClickHandlers()
 })
 
-const bindClickHandlers = () => {
+const bookClickHandlers = () => {
   $('.my_books').on('click', (event) => {
     event.preventDefault()
     history.pushState(null, null, "my_books")
@@ -55,7 +39,7 @@ const bindClickHandlers = () => {
     event.preventDefault()
 
     const values = $(this).serialize()
-
+    console.log(values)
     $.post('/books', values)
       .done(function(data) {
         $('#js-content').html('')
@@ -119,6 +103,7 @@ Book.prototype.formatShow = function() {
         <h3>${this.author}</h3>
         <h4>Genre: ${this.genre.name}</h4>
         <p>${this.summary}</p>
+        <p>${this.reviews.first}</p>
       </div>
     </div>
   `

@@ -1,8 +1,17 @@
 <div class="review-rating" data-score="<%= review.rating %>"></div>
 <div id="body-<%= review.id %>">
-  <p><%= truncate review.comment %>
-    <a href='#' class="js-more" data-id='<%= review.id %>'>
-      more...</a>
+  <% if review.comment.glance.length > 200 %>
+  <p><%= truncate(review.comment, length: 200) %>
+    <%= link_to '...read more', '', class: 'more-#{review.id}' %>
+    <script>
+      $('.more-<%=review.id%>').on('click', function(event) {
+        event.preventDefault()
+        console.log('preventing Def!')
+      })
+    </script>
+  <% else %>
+    <%= review.comment.glance %>
+  <% end %>
   </p>
 </div>
 

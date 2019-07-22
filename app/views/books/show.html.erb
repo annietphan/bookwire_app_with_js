@@ -61,12 +61,14 @@
   });
 </script>
 
+<!-- how to get the bookId bc reviewId is stored in the data-id attribute? -->
 <script type="text/javascript" charset="utf-8">
   $(function () {
-    $(".js-more").on('click', function() {
+    $(".js-more").on('click', function(event) {
+      event.preventDefault()
       console.log(this)
-      let bookId = $(this).data("id")
-      let id = $(this).data("id")
+      // let bookId = $(this).data("id")
+      // let reviewId = $(this).data("id")
       $.get("/books/")
     })
   })
