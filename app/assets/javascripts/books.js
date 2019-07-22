@@ -107,7 +107,14 @@ Book.prototype.formatIndex = function() {
 // add the rest of formatting in this method
 Book.prototype.formatShow = function() {
   let bookHtml = `
-    <h3>${this.title}</h3>
+    <div class="row">
+      <div class="col-md-8">
+        <h2><strong>${this.title}</strong></h2>
+        <h3>${this.author}</h3>
+        <h4>Genre: ${this.genre.name}</h4>
+        <p>${this.summary}</p>
+      </div>
+    </div>
   `
   return bookHtml
 }
