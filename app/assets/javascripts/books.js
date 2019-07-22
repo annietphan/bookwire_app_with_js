@@ -58,7 +58,7 @@ const bindClickHandlers = () => {
 
     $.post('/books', values)
       .done(function(data) {
-        console.log(data)
+        $('#js-content').html('')
       })
   })
 }
