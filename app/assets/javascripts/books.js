@@ -99,18 +99,21 @@ function Book(book) {
 // add the rest of formatting in this method
 Book.prototype.formatIndex = function() {
   let bookHtml = `
-    <a href="/books/${this.id}" data-id='${this.id}' class ="show_link"><h3>${this.title}</h3></a>
+    <div class="row">
+      <div class="col-md-3">
+        <a href="/books/${this.id}" data-id='${this.id}' class ="show_link"><h3>${this.title}</h3></a>
+      </div>
+    </div>
   `
   return bookHtml
 }
 
 // add the rest of formatting in this method
+// this method needs to have  <div class="col-md-4"><p>image goes here</p></div> but paperclip gem isn't really working with javascript
 Book.prototype.formatShow = function() {
   let bookHtml = `
     <div class="row">
-      <div class="col-md-4">
-        <p>image goes here</p>
-      </div>
+
       <div class="col-md-8">
         <h2><strong>${this.title}</strong></h2>
         <h3>${this.author}</h3>
