@@ -12,7 +12,7 @@ $(document).ready(function() {
       let c = content.substr(0, showChar)
       let h = content.substr(showChar-1, content.length - showChar)
 
-      let html = c + '<span class="moreellipses">' + ellipsesText + '$nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moreText + '</a></span>'
+      let html = c + '<span class="moreellipses">' + ellipsesText + '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moreText + '</a></span>'
 
       $(this).html(html)
     }

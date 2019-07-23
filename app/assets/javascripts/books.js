@@ -24,6 +24,7 @@ const bookClickHandlers = () => {
   })
   $(document).on('click', ".show_link", function(event) {
     event.preventDefault()
+    debugger
     $('#js-content').html('')
     let id = $(this).attr('data-id')
     fetch(`/books/${id}.json`)
@@ -31,6 +32,7 @@ const bookClickHandlers = () => {
     .then(book => {
       let newBook = new Book(book)
       let bookHtml = newBook.formatShow()
+
       $('#js-content').append(bookHtml)
     })
   })
@@ -95,6 +97,13 @@ Book.prototype.formatIndex = function() {
 // add the rest of formatting in this method
 // this method needs to have  <div class="col-md-4"><p>image goes here</p></div> but paperclip gem isn't really working with javascript
 Book.prototype.formatShow = function() {
+  let reviews = this.reviews.map(review => {
+    debugger
+    return(`
+      <li>${review.comment}</li>
+      `)
+  }).join("")
+
   let bookHtml = `
     <div class="row">
 
@@ -103,9 +112,12 @@ Book.prototype.formatShow = function() {
         <h3>${this.author}</h3>
         <h4>Genre: ${this.genre.name}</h4>
         <p>${this.summary}</p>
-        <p>${this.reviews.first}</p>
+        <ul>
+          ${reviews}
+        </ul>
       </div>
     </div>
   `
+
   return bookHtml
 }
