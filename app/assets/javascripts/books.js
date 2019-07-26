@@ -1,4 +1,4 @@
-
+// clear out alerts
 
 $(() => {
   bookClickHandlers()
@@ -24,7 +24,6 @@ const bookClickHandlers = () => {
   })
   $(document).on('click', ".show_link", function(event) {
     event.preventDefault()
-    debugger
     $('#js-content').html('')
     let id = $(this).attr('data-id')
     fetch(`/books/${id}.json`)
@@ -41,7 +40,6 @@ const bookClickHandlers = () => {
     event.preventDefault()
 
     const values = $(this).serialize()
-    console.log(values)
     $.post('/books', values)
       .done(function(data) {
         $('#js-content').html('')
@@ -61,11 +59,25 @@ const getMyBooks = () => {
       $('#js-content').html('')
       let header = '<h1><strong>My Books<strong></h1>'
       $('#js-content').append(header)
+      books.sort(function(a, b) {
+        a = a.title.toLowerCase()
+        b = b.title.toLowerCase()
+
+        return a < b ? -1 : a > b ? 1 : 0;
+      })
       books.forEach(book => {
         let newBook = new Book(book)
         let bookHtml = newBook.formatIndex()
+
         $('#js-content').append(bookHtml)
       })
+      // function compare(a, b) {
+      //   a = a.toLowerCase();
+      //   b = b.toLowerCase();
+      //
+      //   return (a < b) ? -1 : (a > b) ? 1 : 0;
+      // }
+
     })
 }
 
@@ -91,14 +103,16 @@ Book.prototype.formatIndex = function() {
       </div>
     </div>
   `
+
   return bookHtml
 }
 
 // add the rest of formatting in this method
+// if statement for no reviews
 // this method needs to have  <div class="col-md-4"><p>image goes here</p></div> but paperclip gem isn't really working with javascript
 Book.prototype.formatShow = function() {
   let reviews = this.reviews.map(review => {
-    debugger
+
     return(`
       <li>${review.comment}</li>
       `)
@@ -112,6 +126,7 @@ Book.prototype.formatShow = function() {
         <h3>${this.author}</h3>
         <h4>Genre: ${this.genre.name}</h4>
         <p>${this.summary}</p>
+        <p>Reviews</p>
         <ul>
           ${reviews}
         </ul>
